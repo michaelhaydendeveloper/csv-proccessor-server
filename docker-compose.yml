@@ -1,0 +1,59 @@
+version: '3.7'
+services:
+  csv-processor:
+    container_name: csv-processor
+    build:
+      context: .
+    environment:
+      - RUN_MIGRATIONS_ON_START=false
+
+  postgres-db:
+    image: postgres:11
+    ports:
+      - 6433:5432
+    environment:
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_DB=csv_processor
+      - PG_DATA=/var/lib/postgresql/data
+    volumes:
+      - csvprocessortemplatepgdata:/var/lib/postgresql/data
+
+  postgres-test-db:
+    image: postgres:11
+    ports:
+      - 6434:5432
+    environment:
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_DB=csv_processor_test
+    tmpfs:
+      - /var/lib/postgresql/data
+
+  mongo-db:
+    image: mongo:latest
+    ports:
+      - 27018:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=dev
+      - MONGO_INITDB_ROOT_PASSWORD=password123
+      - MONGO_INITDB_DATABASE=CsvProcessord
+    volumes:
+      # seeding scripts
+#      - ./ops/mongo-entrypoint/init-mongo.js:/docker-entrypoint-initdb.d/initi-mongo.js:ro
+      - ./data/db:/data/db
+
+  mongo-test-db:
+    image: mongo:latest
+    ports:
+      - 27019:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dev
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: CsvProcessor
+    tmpfs:
+      - /data/db
+
+volumes:
+  csvprocessortemplatepgdata:
+  csvprocessormongodbdata:
