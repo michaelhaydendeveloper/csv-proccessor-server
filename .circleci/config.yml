@@ -1,0 +1,40 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@2.0.3
+
+commands:
+  setup-node-and-yarn-install-with-cache:
+    steps:
+      - node/install:
+          install-yarn: true
+          node-version: latest
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: yarn.lock
+
+jobs:
+  lint-and-test:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - setup-node-and-yarn-install-with-cache
+      - run:
+          name: Lint
+          command: yarn lint
+      - run:
+          name: Run tests
+          command: yarn test
+      - run:
+          name: Setup Code Climate test reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter before-build
+            ./cc-test-reporter after-build --prefix /usr/src/app
+
+workflows:
+  run-ci:
+    jobs:
+      - lint-and-test
