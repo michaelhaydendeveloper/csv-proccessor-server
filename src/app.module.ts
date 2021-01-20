@@ -1,7 +1,8 @@
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { BatchModule } from './batch/batch.module';
-import { FileModule } from './file/file.module';
+import { DocumentDetailModule } from './documentDetail/documentDetail.module';
+import { DocumentProcessedModule } from './documentProcessed/documentProcessed.module';
+import { DocumentRawModule } from './documentRaw/documentRaw.module';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -27,8 +28,9 @@ import { join } from 'path';
       entities: [join(__dirname, '**', '*.entity.{ts,js}')],
       synchronize: true,
     }),
-    FileModule,
-    BatchModule,
+    DocumentDetailModule,
+    DocumentProcessedModule,
+    DocumentRawModule,
   ],
   controllers: [AppController],
   providers: [AppService],
