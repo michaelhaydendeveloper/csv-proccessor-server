@@ -21,6 +21,9 @@ jobs:
       - checkout
       - setup-node-and-yarn-install-with-cache
       - run:
+          - name: Start up Services
+          - command: docker-compose up -d
+      - run:
           name: Lint
           command: yarn lint
       - run:
