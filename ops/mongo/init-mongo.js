@@ -9,8 +9,8 @@ db.createUser({
   ]
 });
 
-db.file.drop();
-db.file.insertMany([
+db.documentDetail.drop();
+db.documentDetail.insertMany([
   {
     name: 'Tensor',
     age: 6
@@ -21,8 +21,20 @@ db.file.insertMany([
   }
 ]);
 
-db.batch.drop();
-db.batch.insertMany([
+db.documentRaw.drop();
+db.documentRaw.insertMany([
+  {
+    name: 'Tensor',
+    age: 6
+  },
+  {
+    name: 'Flow',
+    age: 10
+  }
+]);
+
+db.documentProcessed.drop();
+db.documentProcessed.insertMany([
   {
     name: 'Tensor',
     age: 6

@@ -1,5 +1,3 @@
-import DateTimeFormat = Intl.DateTimeFormat;
-
 export enum Type {
   '-' = '-',
   'd' = 'd',
@@ -34,7 +32,7 @@ export interface Properties {
   group: number;
 }
 
-export public interface Meta {
+export interface Meta {
   properties: Properties;
 }
 
