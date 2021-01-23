@@ -9,41 +9,41 @@ export class CompanyController {
     private companyService:CompanyService
   ) {}
 
-  /**
-   * Trigger queueing documents
-   */
-  @Get('/document/queue')
-  async queueDocument() {
-    console.log('CompanyController :: queue');
-    return this.companyService.queueDocuments();
-  }
-
-  /**
-   * trigger processing documents
-   */
-  @Get('/document/process')
-  async processDocument() {
-    console.log('CompanyController :: process');
-    return this.companyService.processDocuments();
-  }
-
-  /**
-   * Trigger archiving Documents
-   */
-  @Get('/document/archive')
-  async archiveDocument() {
-    console.log('CompanyController :: archive');
-    return this.companyService.archiveDocuments();
-  }
-
-  /**
-   * Trigger sending Documents to storage (i.e. S3 bucket)
-   */
-  @Get('/document/storage')
-  async storageDocument() {
-    console.log('CompanyController :: storage');
-    return this.companyService.storeDocuments();
-  }
+  // /**
+  //  * Trigger queueing documents
+  //  */
+  // @Get('/document/queue')
+  // async queueDocument() {
+  //   console.log('CompanyController :: queue');
+  //   return this.companyService.queueDocuments();
+  // }
+  //
+  // /**
+  //  * trigger processing documents
+  //  */
+  // @Get('/document/process')
+  // async processDocument() {
+  //   console.log('CompanyController :: process');
+  //   return this.companyService.processDocuments();
+  // }
+  //
+  // /**
+  //  * Trigger archiving Documents
+  //  */
+  // @Get('/document/archive')
+  // async archiveDocument() {
+  //   console.log('CompanyController :: archive');
+  //   return this.companyService.archiveDocuments();
+  // }
+  //
+  // /**
+  //  * Trigger sending Documents to storage (i.e. S3 bucket)
+  //  */
+  // @Get('/document/storage')
+  // async storageDocument() {
+  //   console.log('CompanyController :: storage');
+  //   return this.companyService.storeDocuments();
+  // }
 
   /**
    * Get all companies
