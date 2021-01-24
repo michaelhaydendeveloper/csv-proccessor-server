@@ -23,16 +23,24 @@ jobs:
       - setup-node-and-yarn-install-with-cache
       - run:
           name: Start up Services
-          command: docker-compose up -d
+          command: |
+            docker-compose up -d
+      - run:
+          name: install packages
+          command: |
+            docker-compose run --no-deps --rm csv-processor yarn install
       - run:
           name: Lint
-          command: docker-compose run --no-deps --rm csv-processor yarn lint
+          command: |
+            docker-compose run --no-deps --rm csv-processor yarn lint
       - run:
           name: Run Migrations
-          command: docker-compose run --no-deps --rm csv-processor yarn typeorm:migrate
+          command: |
+            docker-compose run --no-deps --rm csv-processor yarn typeorm:migrate
       - run:
           name: Run tests
-          command: docker-compose run --no-deps --rm csv-processor yarn test:cov
+          command: |
+            docker-compose run --no-deps --rm csv-processor yarn test:cov
       - run:
           name: Setup Code Climate test reporter
           command: |
