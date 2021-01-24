@@ -38,8 +38,7 @@ jobs:
       - run:
           name: Wait for Postgres to start
           command: |
-            dockerize -wait tcp://localhost:6433 -timeout 1m
-            dockerize -wait tcp://localhost:6434 -timeout 1m
+            dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           name: install packages
 #          command: |
