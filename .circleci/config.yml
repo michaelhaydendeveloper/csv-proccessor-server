@@ -26,13 +26,13 @@ jobs:
           command: docker-compose up -d
       - run:
           name: Lint
-          command: yarn lint
+          command: docker-compose run --no-deps --rm csv-processor yarn lint
       - run:
           name: Run Migrations
-          command: yarn typeorm:migrate
+          command: docker-compose run --no-deps --rm csv-processor yarn typeorm:migrate
       - run:
           name: Run tests
-          command: yarn test:cov
+          command: docker-compose run --no-deps --rm csv-processor yarn test:cov
       - run:
           name: Setup Code Climate test reporter
           command: |
