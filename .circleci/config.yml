@@ -32,14 +32,14 @@ jobs:
             docker-compose up -d --build csv-processor
       - run:
           name: install packages
-          command: |
+#          command: |
 #            docker-compose run --no-deps --rm csv-processor yarn install
-            yarn install
+          command: yarn install
       - run:
           name: Lint
-          command: |
+#          command: |
 #            docker-compose run --no-deps --rm csv-processor yarn lint
-            yarn lint
+          command: yarn lint
       - run:
           name: Run Migrations
           command: |
