@@ -17,6 +17,8 @@ jobs:
   lint-and-test:
     executor:
       name: node/default
+    docker:
+      - image: circleci/node:12.16.1
     steps:
       - checkout
       - setup-node-and-yarn-install-with-cache
