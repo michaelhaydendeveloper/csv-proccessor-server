@@ -14,9 +14,7 @@ commands:
           cache-key: yarn.lock
 
 jobs:
-  lint-and-test:
-#    executor:
-#      name: node/default
+  docker-build-lint-and-test:
     docker:
       - image: circleci/node:12.16.1
     steps:
