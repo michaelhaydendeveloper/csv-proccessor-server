@@ -28,12 +28,13 @@ jobs:
             docker-compose down -v
       - run:
           name: Start up Services
-          command: |
-            docker-compose up -d --build postgres-db
-            docker-compose up -d --build postgres-test-db
-            docker-compose up -d --build mongo-db
-            docker-compose up -d --build mongo-test-db
-            docker-compose up -d --build csv-processor
+#          command: |
+#            docker-compose up -d --build postgres-db
+#            docker-compose up -d --build postgres-test-db
+#            docker-compose up -d --build mongo-db
+#            docker-compose up -d --build mongo-test-db
+#            docker-compose up -d --build csv-processor
+          command: docker-compose up -d --include-deps
       - run:
           name: Wait for Postgres to start
           command: |
