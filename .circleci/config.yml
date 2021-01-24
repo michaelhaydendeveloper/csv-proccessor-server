@@ -19,8 +19,13 @@ jobs:
       - image: circleci/node:12.16.1
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          docker_layer_caching: false
 #      - setup-node-and-yarn-install-with-cache
+      - run:
+          name: Clean Docker
+          command: |
+            docker-compose down -v
       - run:
           name: Start up Services
           command: |
