@@ -33,11 +33,13 @@ jobs:
       - run:
           name: install packages
           command: |
-            docker-compose run --no-deps --rm csv-processor yarn install
+#            docker-compose run --no-deps --rm csv-processor yarn install
+            yarn install
       - run:
           name: Lint
           command: |
-            docker-compose run --no-deps --rm csv-processor yarn lint
+#            docker-compose run --no-deps --rm csv-processor yarn lint
+            yarn lint
       - run:
           name: Run Migrations
           command: |
