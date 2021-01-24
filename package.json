@@ -19,7 +19,22 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "typeorm:generate": "npm run typeorm migration:generate -- -n",
+    "typeorm:migrate": "npm run typeorm migration:run",
+    "typeorm:create": "npm run typeorm migration:create -- -n",
+    "db:seed:config": "NODE_ENV=development ts-node ./node_modules/typeorm-seeding/dist/cli.js config",
+    "db:seed:run": "NODE_ENV=development ts-node ./node_modules/typeorm-seeding/dist/cli.js seed",
+    "db:drop": "yarn typeorm schema:drop",
+    "db:migrate": "yarn typeorm migration:run",
+    "db:revert": "yarn typeorm migration:revert",
+    "db:migrate:all": "yarn db:migrate && yarn db:migrate:test",
+    "db:reset": "yarn db:drop && yarn db:migrate",
+    "db:drop:test": "NODE_ENV=test yarn typeorm schema:drop",
+    "db:migrate:test": "NODE_ENV=test yarn typeorm migration:run",
+    "db:revert:test": "NODE_ENV=test yarn typeorm migration:revert",
+    "db:reset:test": "yarn db:drop:test && yarn db:migrate:test"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.5",

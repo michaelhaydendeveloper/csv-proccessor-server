@@ -26,7 +26,10 @@ jobs:
           command: docker-compose up -d
       - run:
           name: Lint
-          command: yarn lint
+          command: yarn lint]
+      - run:
+          name: Run Migrations
+          command: yarn typeorm:migrate
       - run:
           name: Run tests
           command: yarn test:cov
