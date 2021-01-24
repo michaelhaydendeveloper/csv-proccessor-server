@@ -20,15 +20,15 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - setup-node-and-yarn-install-with-cache
+#      - setup-node-and-yarn-install-with-cache
       - run:
           name: Start up Services
           command: |
             docker-compose up -d --build csv-processor
-      - run:
-          name: install packages
-          command: |
-            docker-compose run --no-deps --rm csv-processor yarn install
+#      - run:
+#          name: install packages
+#          command: |
+#            docker-compose run --no-deps --rm csv-processor yarn install
       - run:
           name: Lint
           command: |
