@@ -42,12 +42,14 @@ jobs:
           command: yarn lint
       - run:
           name: Run Migrations
-          command: |
-            docker-compose run --no-deps --rm csv-processor yarn typeorm:migrate
+#          command: |
+#            docker-compose run --no-deps --rm csv-processor yarn typeorm:migrate
+          command: yarn typeorm:migrate
       - run:
           name: Run tests
-          command: |
-            docker-compose run --no-deps --rm csv-processor yarn test:cov
+#          command: |
+#            docker-compose run --no-deps --rm csv-processor yarn test:cov
+          command: yarn test:cov
       - run:
           name: Setup Code Climate test reporter
           command: |
