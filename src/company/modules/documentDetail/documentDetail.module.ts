@@ -4,7 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'DocumentDetail', schema: DocumentDetailSchema }])
+    MongooseModule.forFeature([{ name: 'DocumentDetail', schema: DocumentDetailSchema }]),
   ],
 })
 export class DocumentDetailModule {}
