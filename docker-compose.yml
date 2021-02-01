@@ -35,7 +35,7 @@ services:
     ports:
       - 27018:27017
     environment:
-      - MONGO_INITDB_DATABASE=CsvProcessord
+      - MONGO_INITDB_DATABASE=CsvProcessor
       - MONGO_INITDB_ROOT_USERNAME=dev
       - MONGO_INITDB_ROOT_PASSWORD=password123
     volumes:
@@ -48,7 +48,7 @@ services:
     ports:
       - 27019:27017
     environment:
-      - MONGO_INITDB_DATABASE=CsvProcessordTest
+      - MONGO_INITDB_DATABASE=CsvProcessorTest
       - MONGO_INITDB_ROOT_USERNAME=dev
       - MONGO_INITDB_ROOT_PASSWORD=password123
     tmpfs:

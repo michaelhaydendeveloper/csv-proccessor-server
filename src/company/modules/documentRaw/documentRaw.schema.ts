@@ -7,7 +7,11 @@ export const DocumentRawSchema = new mongoose.Schema({
     ref: 'DocumentDetail',
   },
   data: [{}],
-  error: [{}],
+  error: [{
+    message: String,
+    stackTrace: {},
+    createdAt: Date,
+  }],
   createdAt: Date,
   updatedAt: Date,
 });

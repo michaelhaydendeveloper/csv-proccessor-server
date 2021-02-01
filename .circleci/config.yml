@@ -14,17 +14,50 @@ commands:
           cache-key: yarn.lock
 
 jobs:
-  lint-and-test:
-    executor:
-      name: node/default
+  docker-build-lint-and-test:
+    docker:
+      - image: circleci/node:12.16.1
     steps:
       - checkout
-      - setup-node-and-yarn-install-with-cache
+      - setup_remote_docker:
+          docker_layer_caching: false
+#      - setup-node-and-yarn-install-with-cache
+      - run:
+          name: Clean Docker
+          command: |
+            docker-compose down -v
+      - run:
+          name: Start up Services
+#          command: |
+#            docker-compose up -d --build postgres-db
+#            docker-compose up -d --build postgres-test-db
+#            docker-compose up -d --build mongo-db
+#            docker-compose up -d --build mongo-test-db
+#            docker-compose up -d --build csv-processor
+          command: docker-compose up -d --build
+      - run:
+          name: Wait for Postgres to start
+          command: |
+            dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: install packages
+#          command: |
+#            docker-compose run --no-deps --rm csv-processor yarn install
+          command: yarn install
       - run:
           name: Lint
+#          command: |
+#            docker-compose run --no-deps --rm csv-processor yarn lint
           command: yarn lint
       - run:
+          name: Run Migrations
+#          command: |
+#            docker-compose run --no-deps --rm csv-processor yarn typeorm:migrate
+          command: yarn typeorm:migrate
+      - run:
           name: Run tests
+#          command: |
+#            docker-compose run --no-deps --rm csv-processor yarn test:cov
           command: yarn test:cov
       - run:
           name: Setup Code Climate test reporter
@@ -37,4 +70,4 @@ jobs:
 workflows:
   run-ci:
     jobs:
-      - lint-and-test
+      - docker-build-lint-and-test
